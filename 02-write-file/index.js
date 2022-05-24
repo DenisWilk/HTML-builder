@@ -4,7 +4,7 @@ const { stdin, exit } = process;
 
 const output = fs.createWriteStream(path.resolve(__dirname, 'text.txt'));
 
-console.log('\nEnter your text:\n(for exit press Ctrl+C or write: "exit")\n');
+console.log('\nHi! \nEnter your text and press enter-key:\n(for exit press Ctrl+C or write: "exit")\n');
 
 stdin.on('data', data => {
     if (data.toString().trim() === 'exit') { exit(); }

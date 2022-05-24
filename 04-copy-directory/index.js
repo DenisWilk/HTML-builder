@@ -6,15 +6,13 @@ const folderCopyPath = path.resolve(__dirname, 'files-copy');
 
 async function copyFolder(input, output) {
     try {
-        const elements = await readdir(input, { withFileTypes: true });
-        const delFiles = await readdir(output);
-
         await mkdir(output, { recursive: true });
-        delFiles.forEach(el => unlink(path.resolve(output, el)));
 
-        for (let el of elements) {
-            await copyFile(path.resolve(input, el.name), path.resolve(output, el.name));
-        }
+        const delFiles = await readdir(output);
+        const dataFolder = await readdir(input);
+
+        delFiles.forEach(el => unlink(path.resolve(output, el)));
+        dataFolder.forEach(el => copyFile(path.resolve(input, el), path.resolve(output, el)));
     }
     catch (err) { console.log('\nError:', err.message); }
 }
